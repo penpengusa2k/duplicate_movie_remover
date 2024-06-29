@@ -1,0 +1,29 @@
+version: '3'
+
+tasks:
+  setup:
+    description: "Setup pyenv, install Python 3.12.4, set local version, install poetry, and update .zshrc using Homebrew"
+    cmds:
+      - brew install pyenv  # pyenvのインストール
+      - echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.zshrc
+      - echo 'eval "$(pyenv init --path)"' >> ~/.zshrc
+      - echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
+      - source ~/.zshrc
+
+      - brew install openssl readline sqlite3 xz zlib # python buildに必要なパッケージをインストール
+
+      - pyenv install 3.12.4  # Python 3.12.4のインストール
+      - pyenv local 3.12.4
+
+      - brew install poetry  # poetryのインストール
+      - echo 'export PATH="$HOME/.poetry/bin:$PATH"' >> ~/.zshrc
+      - source ~/.zshrc
+
+      - poetry install  # poetryでリポジトリ指定のパッケージをインストール
+
+  run:
+    description: "Run main.py with poetry environment"
+    cmds:
+      - poetry run python main.py {{.dir}}
+    vars:
+      --dir: '{{.dir}}'
