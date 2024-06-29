@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "duplicate-movie-remover"
+version = "0.1.0"
+description = "remove duplicate movies"
+authors = ["penpengusa2k <tinnanagokunn@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.4"
+argparse = "^1.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
